@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { productsRouter } from "./routes/products-router";
 import { addressesRouter } from "./routes/addresses-router";
-import { videosRouter } from "./routes/videos-router";
+import { videosRouter, videos } from "./routes/videos-router";
 
 export const app = express();
 

@@ -3,7 +3,7 @@ import { Video, Resolution, RequestWithParams, ErrorResponse } from "../types";
 
 export const videosRouter = Router();
 
-const videos: Video[] = [];
+export const videos: Video[] = [];
 
 videosRouter.get("/", (req: Request, res: Response) => {
   res.send(videos);
