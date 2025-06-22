@@ -4,6 +4,7 @@ exports.blogValidator = void 0;
 const express_validator_1 = require("express-validator");
 const nameValidator = (0, express_validator_1.body)("name")
     .isString()
+    .trim()
     .isLength({ min: 1, max: 15 })
     .withMessage("Incorrect name");
 const descriptionValidator = (0, express_validator_1.body)("description")
@@ -12,6 +13,7 @@ const descriptionValidator = (0, express_validator_1.body)("description")
     .withMessage("Incorrect description");
 const websiteUrlValidator = (0, express_validator_1.body)("websiteUrl")
     .isString()
+    .trim()
     .isLength({ min: 1, max: 100 })
     .matches(/^https:\/\/([a-zA-Z0-9_-]+\.)+[a-zA-Z0-9_-]+(\/[a-zA-Z0-9_-]+)*\/?$/)
     .withMessage("Incorrect websiteUrl");
