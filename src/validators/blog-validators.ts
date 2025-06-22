@@ -12,7 +12,7 @@ const websiteUrlValidator = body("websiteUrl")
   .isString()
   .isLength({ min: 1, max: 100 })
   .matches(
-    "pattern: ^https://([a-zA-Z0-9_-]+.)+[a-zA-Z0-9_-]+(/[a-zA-Z0-9_-]+)*/?$"
+    /^https:\/\/([a-zA-Z0-9_-]+\.)+[a-zA-Z0-9_-]+(\/[a-zA-Z0-9_-]+)*\/?$/
   )
   .withMessage("Incorrect websiteUrl");
 

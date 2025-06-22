@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.authMiddleware = void 0;
+exports.inputValidationMiddleware = void 0;
 const express_validator_1 = require("express-validator");
-const authMiddleware = (req, res, next) => {
+const inputValidationMiddleware = (req, res, next) => {
     const formattedErrors = (0, express_validator_1.validationResult)(req).formatWith((error) => ({
         message: error.msg,
         field: error.type === "field" ? error.path : "unknown",
@@ -15,4 +15,4 @@ const authMiddleware = (req, res, next) => {
     }
     next();
 };
-exports.authMiddleware = authMiddleware;
+exports.inputValidationMiddleware = inputValidationMiddleware;

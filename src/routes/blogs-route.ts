@@ -2,6 +2,7 @@ import { Request, Response, Router } from "express";
 import { authMiddleware } from "../middlewares/auth/auth-middleware";
 import { blogValidator } from "../validators/blog-validators";
 import { BlogRepository } from "../repositories/blog-repository";
+import { inputValidationMiddleware } from "../middlewares/inputValidation/input-validation";
 
 export const blogsRoute = Router();
 
@@ -25,6 +26,7 @@ blogsRoute.post(
   "/",
   authMiddleware,
   blogValidator(),
+  inputValidationMiddleware,
   (req: Request, res: Response) => {
     const { name, description, websiteUrl } = req.body;
 
@@ -42,6 +44,7 @@ blogsRoute.put(
   "/:id",
   authMiddleware,
   blogValidator(),
+  inputValidationMiddleware,
   (req: Request, res: Response) => {
     const blog = BlogRepository.getBlogById(req.params.id);
 

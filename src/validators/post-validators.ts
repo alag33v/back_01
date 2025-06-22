@@ -6,6 +6,7 @@ const titleValidator = body("title")
   .isLength({ min: 1, max: 30 })
   .withMessage("Incorrect title");
 const shortDescriptionValidator = body("shortDescription")
+  .exists()
   .isString()
   .isLength({ min: 1, max: 100 })
   .withMessage("Incorrect shortDescription");

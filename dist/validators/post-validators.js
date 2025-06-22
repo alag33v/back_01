@@ -8,6 +8,7 @@ const titleValidator = (0, express_validator_1.body)("title")
     .isLength({ min: 1, max: 30 })
     .withMessage("Incorrect title");
 const shortDescriptionValidator = (0, express_validator_1.body)("shortDescription")
+    .exists()
     .isString()
     .isLength({ min: 1, max: 100 })
     .withMessage("Incorrect shortDescription");

@@ -2,6 +2,8 @@ import { Request, Response, Router } from "express";
 import { authMiddleware } from "../middlewares/auth/auth-middleware";
 import { PostRepository } from "../repositories/post-repository";
 import { postValidator } from "../validators/post-validators";
+import { inputValidationMiddleware } from "../middlewares/inputValidation/input-validation";
+import { BlogRepository } from "../repositories/blog-repository";
 
 export const postsRoute = Router();
 
@@ -25,8 +27,12 @@ postsRoute.post(
   "/",
   authMiddleware,
   postValidator(),
+  inputValidationMiddleware,
   (req: Request, res: Response) => {
-    const { title, shortDescription, content, blogId, blogName } = req.body;
+    const { title, shortDescription, content, blogId } = req.body;
+
+    const blog = BlogRepository.getBlogById(blogId);
+    const blogName = blog?.name || "";
 
     const createdPost = PostRepository.createPost(
       title,
@@ -44,6 +50,7 @@ postsRoute.put(
   "/:id",
   authMiddleware,
   postValidator(),
+  inputValidationMiddleware,
   (req: Request, res: Response) => {
     const post = PostRepository.getPostById(req.params.id);
 

@@ -5,6 +5,8 @@ const express_1 = require("express");
 const auth_middleware_1 = require("../middlewares/auth/auth-middleware");
 const post_repository_1 = require("../repositories/post-repository");
 const post_validators_1 = require("../validators/post-validators");
+const input_validation_1 = require("../middlewares/inputValidation/input-validation");
+const blog_repository_1 = require("../repositories/blog-repository");
 exports.postsRoute = (0, express_1.Router)();
 exports.postsRoute.get("/", (req, res) => {
     const posts = post_repository_1.PostRepository.getAllPosts();
@@ -18,12 +20,14 @@ exports.postsRoute.get("/:id", (req, res) => {
     }
     res.send(post);
 });
-exports.postsRoute.post("/", auth_middleware_1.authMiddleware, (0, post_validators_1.postValidator)(), (req, res) => {
-    const { title, shortDescription, content, blogId, blogName } = req.body;
+exports.postsRoute.post("/", auth_middleware_1.authMiddleware, (0, post_validators_1.postValidator)(), input_validation_1.inputValidationMiddleware, (req, res) => {
+    const { title, shortDescription, content, blogId } = req.body;
+    const blog = blog_repository_1.BlogRepository.getBlogById(blogId);
+    const blogName = (blog === null || blog === void 0 ? void 0 : blog.name) || "";
     const createdPost = post_repository_1.PostRepository.createPost(title, shortDescription, content, blogId, blogName);
     res.status(201).send(createdPost);
 });
-exports.postsRoute.put("/:id", auth_middleware_1.authMiddleware, (0, post_validators_1.postValidator)(), (req, res) => {
+exports.postsRoute.put("/:id", auth_middleware_1.authMiddleware, (0, post_validators_1.postValidator)(), input_validation_1.inputValidationMiddleware, (req, res) => {
     const post = post_repository_1.PostRepository.getPostById(req.params.id);
     if (!post) {
         res.sendStatus(404);

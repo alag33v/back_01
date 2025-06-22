@@ -13,7 +13,7 @@ const descriptionValidator = (0, express_validator_1.body)("description")
 const websiteUrlValidator = (0, express_validator_1.body)("websiteUrl")
     .isString()
     .isLength({ min: 1, max: 100 })
-    .matches("pattern: ^https://([a-zA-Z0-9_-]+.)+[a-zA-Z0-9_-]+(/[a-zA-Z0-9_-]+)*/?$")
+    .matches(/^https:\/\/([a-zA-Z0-9_-]+\.)+[a-zA-Z0-9_-]+(\/[a-zA-Z0-9_-]+)*\/?$/)
     .withMessage("Incorrect websiteUrl");
 const blogValidator = () => [
     nameValidator,
