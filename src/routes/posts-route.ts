@@ -5,12 +5,12 @@ import { postValidator } from "../validators/post-validators";
 
 export const postsRoute = Router();
 
-postsRoute.get("/", authMiddleware, (req: Request, res: Response) => {
+postsRoute.get("/", (req: Request, res: Response) => {
   const posts = PostRepository.getAllPosts();
   res.send(posts);
 });
 
-postsRoute.get("/:id", authMiddleware, (req: Request, res: Response) => {
+postsRoute.get("/:id", (req: Request, res: Response) => {
   const post = PostRepository.getPostById(req.params.id);
 
   if (!post) {

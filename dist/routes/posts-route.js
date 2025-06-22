@@ -6,11 +6,11 @@ const auth_middleware_1 = require("../middlewares/auth/auth-middleware");
 const post_repository_1 = require("../repositories/post-repository");
 const post_validators_1 = require("../validators/post-validators");
 exports.postsRoute = (0, express_1.Router)();
-exports.postsRoute.get("/", auth_middleware_1.authMiddleware, (req, res) => {
+exports.postsRoute.get("/", (req, res) => {
     const posts = post_repository_1.PostRepository.getAllPosts();
     res.send(posts);
 });
-exports.postsRoute.get("/:id", auth_middleware_1.authMiddleware, (req, res) => {
+exports.postsRoute.get("/:id", (req, res) => {
     const post = post_repository_1.PostRepository.getPostById(req.params.id);
     if (!post) {
         res.sendStatus(404);
