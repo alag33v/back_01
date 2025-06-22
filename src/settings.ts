@@ -1,17 +1,12 @@
-import express, { Request, Response } from "express";
-import { productsRouter } from "./routes/products-router";
-import { addressesRouter } from "./routes/addresses-router";
-import { videosRouter, videos } from "./routes/videos-router";
+import express from "express";
+import { blogsRoute } from "./routes/blogs-route";
+import { postsRoute } from "./routes/posts-route";
+import { testingRoute } from "./routes/testing-route";
 
 export const app = express();
 
 app.use(express.json());
-app.use("/products", productsRouter);
-app.use("/addresses", addressesRouter);
-app.use("/videos", videosRouter);
 
-app.delete("/testing/all-data", (req: Request, res: Response) => {
-  videos.length = 0;
-
-  res.sendStatus(204);
-});
+app.use("/blogs", blogsRoute);
+app.use("/posts", postsRoute);
+app.use("/testing", testingRoute);
